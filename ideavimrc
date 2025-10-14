@@ -1,0 +1,158 @@
+let mapleader=" "
+noremap ; :
+noremap r <C-r>
+nnoremap X r
+nnoremap 0 ^
+nnoremap ) g_
+nnoremap Q :q<CR>
+command! -nargs=0 Q :q!
+noremap <C-q> :tabo<CR>
+nnoremap <silent> S :w<CR>
+noremap <silent> <C-S> :wa<CR>
+inoremap <silent> <C-s> <ESC>:w<CR>i
+inoremap <M-f> <ESC>:Format<CR>a
+
+inoremap <S-CR> <ESC>o
+
+" make Y to copy till the end of the line
+nnoremap Y yg_
+nnoremap < <<
+nnoremap > >>
+xnoremap < <gv
+xnoremap > >gv
+
+" Adjacent duplicate words
+noremap <LEADER>dw /\(\<\w\+\>\)\_s*\1
+
+" Space to Tab
+nnoremap <LEADER>tt :%s/    /\t/g
+xnoremap <LEADER>tt :s/    /\t/g
+nnoremap <LEADER>ss :%s/\t/    /g
+xnoremap <leader>ss :s/\t/    /g
+
+" Toggle wrap
+nnoremap <LEADER>tw :set wrap!<CR>
+nnoremap . <C-I>
+nnoremap , <C-O>
+" U/E keys for 5 times u/e (faster navigation)
+nnoremap <silent> F 5k
+nnoremap <silent> E 5j
+xnoremap <silent> F 5k
+xnoremap <silent> E 5j
+
+xnoremap <silent> , ^
+xnoremap <silent> . g_
+xnoremap <silent> <End> g_
+xnoremap <silent> <Home> ^
+" Faster in-line navigation
+nnoremap W 5w
+nnoremap B 5b
+xnoremap W 5w
+xnoremap B 5b
+
+" Go next or forward word under cursor
+nnoremap \\ *
+nnoremap \| #
+
+" rename a word
+nnoremap cw ciw
+
+smap <ESC> <ESC>:noh<CR>
+" Ctrl + U or E will move up/down the view port without moving the cursor
+noremap <C-W> 5<C-y>
+noremap <C-E> 5<C-e>
+
+" ===
+" === Insert Mode Cursor Movement
+" ===
+inoremap jj <ESC>l
+inoremap jk <ESC>l
+inoremap kk <ESC>l
+
+" ===
+" === Window management
+" ===
+" Use <space> + new arrow keys for moving the cursor around windows
+noremap <LEADER>w <C-w>w
+noremap <LEADER><Up> <C-w>k
+noremap <LEADER><Down> <C-w>j
+noremap <LEADER><Left> <C-w>h
+noremap <LEADER><Right> <C-w>l
+
+" Disable the default s key
+noremap s <nop>
+
+" split the screens to up (horizontal), down (horizontal), left (vertical), right (vertical)
+nnoremap s<up> :set nosplitbelow<CR>:split<CR>:set splitbelow<CR>
+nnoremap s<down> :set splitbelow<CR>:split<CR>
+nnoremap s<left> :set nosplitright<CR>:vsplit<CR>:set splitright<CR>
+nnoremap s<right> :set splitright<CR>:vsplit<CR>
+
+" Place the two screens up and down
+nnoremap sh <C-w>t<C-w>K
+" Place the two screens side by side
+nnoremap sv <C-w>t<C-w>H
+
+" Rotate screens
+nnoremap srh <C-w>b<C-w>K
+nnoremap srv <C-w>b<C-w>H
+
+" Press <SPACE> + q to close the window below the current window
+nnoremap <LEADER>q <C-w>j:q<CR>
+nnoremap <Leader>Q :tabo<CR>
+
+" ===
+" === Tab management
+" ===
+" Create a new tab with t/
+nnoremap t/ :tabnew<CR>
+" Move around tabs with t, and t.
+nnoremap t, :-tabnext<CR>
+nnoremap t. :+tabnext<CR>
+" Move the tabs with tm, and tm.
+nnoremap tm, :-tabmove<CR>
+nnoremap tm. :+tabmove<CR>
+
+nnoremap <silent> <LEADER><LEADER> <Esc>/<++><CR>:nohlsearch<CR>v3l<C-g>
+inoremap <silent> <C-p> <++>
+noremap ` ~<left>
+
+nnoremap tt :action SelectIn<CR>
+" Code review
+nnoremap gd :action GotoDeclaration<CR>
+nnoremap gi :action GotoImplementation<CR>
+nnoremap <C-f> :action SearchEverywhere<CR>
+nnoremap gf :action GotoFile<CR>
+nnoremap fu :action FindUsages<CR>
+nnoremap ga :action GotoAction<CR>
+nnoremap gc :action GotoClass<CR>
+nnoremap gd :action GotoDeclaration<CR>
+nnoremap gs :action GotoSymbol<CR>
+nnoremap gr :action ShowUsages<CR>
+nnoremap <Leader>fu :action FindUsages<CR>
+
+nnoremap <Leader>ga :action GotoAction<CR>
+nnoremap <Leader>gc :action GotoClass<CR>
+nnoremap <Leader>gd :action GotoDeclaration<CR>
+nnoremap <Leader>gf :action GotoFile<CR>
+nnoremap <Leader>gi :action GotoImplementation<CR>
+nnoremap <Leader>gs :action GotoSymbol<CR>
+nnoremap <Leader>gt :action GotoTest<CR>
+
+nnoremap <Leader>fp :action ShowFilePath<CR>
+nnoremap <Leader>ic :action InspectCode<CR>
+nnoremap <Leader>mv :action ActivateMavenProjectsToolWindow<CR>
+nnoremap <Leader>oi :action OptimizeImports<CR>
+nnoremap <Leader>pm :action ShowPopupMenu<CR>
+nnoremap <Leader>rc :action RunToCursor<CR>
+nnoremap <Leader>rC :action ChooseRunConfiguration<CR>
+nnoremap <Leader>re :action RenameElement<CR>
+nnoremap <Leader>rf :action RenameFile<CR>
+nnoremap <Leader>rr :action Rerun<CR>
+nnoremap <Leader>se :action SearchEverywhere<CR>
+nnoremap <Leader>su :action ShowUsages<CR>
+nnoremap <Leader>tc :action CloseActiveTab<CR>
+nnoremap <Leader>si :action StepInto<CR>
+nnoremap <Leader>tb :action ToggleLineBreakpoint<CR>
+nnoremap <Leader>tl Vy<CR>:action ActivateTerminalToolWindow<CR>
+vnoremap <Leader>tl y<CR>:action ActivateTerminalToolWindow<CR>
