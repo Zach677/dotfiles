@@ -14,12 +14,11 @@ cask "font-symbols-only-nerd-font"
 brew "shellcheck"
 # lazygit
 brew "lazygit"
-# neovim
-brew "neovim"
 # Static checker for GitHub Actions workflow files
 brew "actionlint"
 # Plugin manager for zsh, inspired by oh-my-zsh and vundle
 brew "antigen"
+brew "uv"
 # Double-entry accounting tool that works on plain text files
 brew "beancount"
 # Language server for beancount files
