@@ -167,9 +167,10 @@ function pouptmux() {
   fi
 }
 
-typeset -U path
+typeset -U path PATH
 
 path=(
+    "$HOME/.local/bin"
     /opt/homebrew/bin
     /opt/homebrew/sbin
     # Homebrew 安装的但未默认链接的软件 (keg-only)
@@ -184,7 +185,7 @@ path=(
 # export GOPROXY=https://goproxy.io,direct
 eval "$(starship init zsh)"
 eval "$(zoxide init zsh)"
-eval $(thefuck --alias)
+eval "$(thefuck --alias)"
 eval "$(mise activate zsh)"
 
 
@@ -333,9 +334,6 @@ builtin bindkey "^[^H" backward-kill-word
 builtin bindkey "^[^?" backward-kill-word
 #proxy
 # export export https_proxy=http://127.0.0.1:6152;export http_proxy=http://127.0.0.1:6152;export all_proxy=socks5://127.0.0.1:6153
-
-#claude
-# export ANTHROPIC_BASE_URL=https://anyrouter.top
 
 function gi() { curl -sLw "\n" https://www.toptal.com/developers/gitignore/api/$@ ;}
 export GPG_TTY=$(tty)
