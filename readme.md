@@ -39,3 +39,9 @@ Notes:
 - Edit global versions in `config/mise/config.toml` and run `mise install` again.
 - For strict reproducibility, pin exact versions (e.g. `node = "22.17.0"`) instead of `latest`/`lts`.
 - You can also set versions via: `mise use -g node@lts python@3.12`.
+
+### Zsh
+
+`.zshrc` is a small loader. Shared shell configuration lives in `config/zsh/*.zsh`
+and is loaded in filename order. Keep local machine-only settings in
+`~/.zshrc.local` instead of committing them here.
