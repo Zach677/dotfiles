@@ -9,7 +9,7 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 lerna-debug.log*
-
+.superpowers/
 # Diagnostic reports (https://nodejs.org/api/report.html)
 report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
 
@@ -122,3 +122,9 @@ ctag
 .env
 .env.local
 .env.development.local
+
+dist
+temp
+settings.local.json
+
+.kiro

@@ -3,26 +3,26 @@ ANTIGEN="$HOME/.local/bin/antigen.zsh"
 
 # Install antigen.zsh if not exist
 if [ ! -f "$ANTIGEN" ]; then
-  [ ! -d "$HOME/.local" ] && mkdir -p "$HOME/.local" 2>/dev/null
-  [ ! -d "$HOME/.local/bin" ] && mkdir -p "$HOME/.local/bin" 2>/dev/null
-  [ ! -f "$HOME/.z" ] && touch "$HOME/.z"
-  URL="https://cdn.jsdelivr.net/gh/zsh-users/antigen@master/bin/antigen.zsh"
-  TMPFILE="/tmp/antigen.zsh"
-  if [ -x "$(which curl)" ]; then
-    curl -L "$URL" -o "$TMPFILE"
-  elif [ -x "$(which wget)" ]; then
-    wget "$URL" -O "$TMPFILE"
-  else
-    echo "ERROR: please install curl or wget before installation !!"
-    exit
-  fi
-  if [ ! $? -eq 0 ]; then
-    echo ""
-    echo "ERROR: downloading antigen.zsh ($URL) failed !!"
-    exit
-  fi
-  echo "move $TMPFILE to $ANTIGEN"
-  mv "$TMPFILE" "$ANTIGEN"
+    [ ! -d "$HOME/.local" ] && mkdir -p "$HOME/.local" 2>/dev/null
+    [ ! -d "$HOME/.local/bin" ] && mkdir -p "$HOME/.local/bin" 2>/dev/null
+    [ ! -f "$HOME/.z" ] && touch "$HOME/.z"
+    URL="https://cdn.jsdelivr.net/gh/zsh-users/antigen@master/bin/antigen.zsh"
+    TMPFILE="/tmp/antigen.zsh"
+    if [ -x "$(which curl)" ]; then
+        curl -L "$URL" -o "$TMPFILE"
+    elif [ -x "$(which wget)" ]; then
+        wget "$URL" -O "$TMPFILE"
+    else
+        echo "ERROR: please install curl or wget before installation !!"
+        exit
+    fi
+    if [ ! $? -eq 0 ]; then
+        echo ""
+        echo "ERROR: downloading antigen.zsh ($URL) failed !!"
+        exit
+    fi
+    echo "move $TMPFILE to $ANTIGEN"
+    mv "$TMPFILE" "$ANTIGEN"
 fi
 
 VISUAL=nvim
@@ -108,9 +108,9 @@ bindkey '\e[1;3A' beginning-of-line
 bindkey '\e[1;3B' end-of-line
 
 if [[ -n "$TMUX" ]]; then
-  bindkey -s '\e[1~' '\eOH'
-  bindkey -s '\e[4~' '\eOF'
-  export TERM=screen-256color
+    bindkey -s '\e[1~' '\eOH'
+    bindkey -s '\e[4~' '\eOF'
+    export TERM=screen-256color
 fi
 # options
 unsetopt correct_all
@@ -147,24 +147,24 @@ echo -ne '\e[5 q'
 
 # Use beam shape cursor for each new prompt.
 preexec() {
-  echo -ne '\e[5 q'
+    echo -ne '\e[5 q'
 }
 
 _fix_cursor() {
-  echo -ne '\e[5 q'
+    echo -ne '\e[5 q'
 }
 precmd_functions+=(_fix_cursor)
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 function pouptmux() {
-  width=${2:-80%}
-  height=${2:-80%}
-  if [ "$(tmux display-message -p -F "#{session_name}")" = "popup" ]; then
-    tmux detach-client
-  else
-    tmux popup -d '#{pane_current_path}' -xC -yC -w$width -h$height -E "tmux attach -t popup || tmux new -s popup"
-  fi
+    width=${2:-80%}
+    height=${2:-80%}
+    if [ "$(tmux display-message -p -F "#{session_name}")" = "popup" ]; then
+        tmux detach-client
+    else
+        tmux popup -d '#{pane_current_path}' -xC -yC -w$width -h$height -E "tmux attach -t popup || tmux new -s popup"
+    fi
 }
 
 typeset -U path PATH
@@ -188,19 +188,18 @@ eval "$(zoxide init zsh)"
 eval "$(thefuck --alias)"
 eval "$(mise activate zsh)"
 
-
 # tabtab source for packages
 # uninstall by removing these lines
 [[ -f ~/.config/tabtab/zsh/__tabtab.zsh ]] && . ~/.config/tabtab/zsh/__tabtab.zsh || true
 
 #  fast paste
 pasteinit() {
-OLD_SELF_INSERT=${${(s.:.)widgets[self-insert]}[2,3]}
- zle -N self-insert url-quote-magic
+    OLD_SELF_INSERT=${${(s.:.)widgets[self - insert]}[2,3]}
+    zle -N self-insert url-quote-magic
 }
 
 pastefinish() {
- zle -N self-insert $OLD_SELF_INSERT
+    zle -N self-insert $OLD_SELF_INSERT
 }
 
 zstyle :bracketed-paste-magic paste-init pasteinit
@@ -208,9 +207,8 @@ zstyle :bracketed-paste-magic paste-finish pastefinish
 
 # functions
 # Get the owner of the repository to which you contributed (Pull Requests)
-ghpall ()
-{
-   gh api graphql --paginate -f query='
+ghpall() {
+    gh api graphql --paginate -f query='
      query($endCursor: String) {
        user(login: "CodeStudents") {
          pullRequests(first: 100, after: $endCursor, states: MERGED) {
@@ -222,9 +220,9 @@ ghpall ()
          }
        }
      }
-   '  --jq '.data.user.pullRequests.nodes[].repository.owner.login' | sort | uniq -c | sort -r
-   # Merge all dependency PRs
-   gh search prs --owner Innei author:app/renovate --json "url" --jq ".[].url" | xargs -I {} gh pr merge {} --squash --auto
+   ' --jq '.data.user.pullRequests.nodes[].repository.owner.login' | sort | uniq -c | sort -r
+    # Merge all dependency PRs
+    gh search prs --owner Innei author:app/renovate --json "url" --jq ".[].url" | xargs -I {} gh pr merge {} --squash --auto
 }
 
 ghdep() {
@@ -238,15 +236,15 @@ ghfl() {
 alias nvim-dot="NVIM_APPNAME=nvimdots nvim"
 
 function nvims() {
-  items=("default" "nvim-dot" 'xloby_nvim')
-  config=$(printf "%s\n" "${items[@]}" | fzf --prompt=" Neovim Config >" --height=~50% --layout=reverse --border --exit-0)
-  if [[ -z $config ]]; then
-    echo "Nothing selected"
-    return 0
-  elif [[ $config == "default" ]]; then
-    config=""
-  fi
-  NVIM_APPNAME=$config nvim $@
+    items=("default" "nvim-dot" 'xloby_nvim')
+    config=$(printf "%s\n" "${items[@]}" | fzf --prompt=" Neovim Config >" --height=~50% --layout=reverse --border --exit-0)
+    if [[ -z $config ]]; then
+        echo "Nothing selected"
+        return 0
+    elif [[ $config == "default" ]]; then
+        config=""
+    fi
+    NVIM_APPNAME=$config nvim $@
 }
 
 bindkey -s ^a "nvims\n"
@@ -325,7 +323,6 @@ alias md='frogmouth '
 # alias end
 [[ "$TERM_PROGRAM" == "kiro" ]] && . "$(kiro --locate-shell-integration-path zsh)"
 
-
 export STARSHIP_LOG=error
 
 builtin bindkey "^A" beginning-of-line
@@ -335,5 +332,12 @@ builtin bindkey "^[^?" backward-kill-word
 #proxy
 # export export https_proxy=http://127.0.0.1:6152;export http_proxy=http://127.0.0.1:6152;export all_proxy=socks5://127.0.0.1:6153
 
-function gi() { curl -sLw "\n" https://www.toptal.com/developers/gitignore/api/$@ ;}
+function gi() { curl -sLw "\n" https://www.toptal.com/developers/gitignore/api/$@; }
 export GPG_TTY=$(tty)
+
+# opencli completion
+fpath=(/Users/star/.zsh/completions $fpath)
+autoload -Uz compinit && compinit
+export SSH_AUTH_SOCK=/Users/star/Library/Containers/com.bitwarden.desktop/Data/.bitwarden-ssh-agent.sock
+launchctl setenv SSH_AUTH_SOCK "$SSH_AUTH_SOCK"
+export CLAUDE_CODE_NO_FLICKER=1
