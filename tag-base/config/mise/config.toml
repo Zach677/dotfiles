@@ -6,3 +6,6 @@ node = "lts"
 pnpm = "latest"
 ruby = "latest"
 rust = "latest"
+
+[settings.ruby]
+compile = false
