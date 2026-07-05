@@ -18,7 +18,7 @@
 	format = ssh
 [gpg "ssh"]
 	program = "/usr/bin/ssh-keygen"
-	allowedSigners = /Users/star/.ssh/allowedSigners
+	allowedSignersFile = /Users/star/.ssh/allowedSigners
 [commit]
 	gpgsign = true
 [core]
