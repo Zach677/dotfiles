@@ -1,6 +1,6 @@
 [user]
 	name = Zach
-	email = 2801818616z@gmail.com
+	email = velanorium@gmail.com
 	signingkey = key::ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDywDWZq31zxpDSDpVRXUWhnQbwi5LkBsxBUal302pG4
 [alias]
 	sa = status
@@ -64,8 +64,8 @@
 [branch]
     autoSetupMerge = simple
 [credential "https://github.com"]
-	helper = 
+	helper =
 	helper = !/opt/homebrew/bin/gh auth git-credential
 [credential "https://gist.github.com"]
-	helper = 
+	helper =
 	helper = !/opt/homebrew/bin/gh auth git-credential
