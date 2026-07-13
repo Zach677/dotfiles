@@ -2,9 +2,6 @@ tap "cirruslabs/cli"
 tap "homebrew/cask"
 tap "homebrew/core"
 tap "homebrew/services"
-tap "mongodb/brew"
-tap "nrlquaker/createzap"
-tap "homebrew/cask-fonts"
 tap "zach677/star"
 
 # font-family
@@ -16,8 +13,10 @@ brew "shellcheck"
 brew "lazygit"
 # Static checker for GitHub Actions workflow files
 brew "actionlint"
-# Plugin manager for zsh, inspired by oh-my-zsh and vundle
-brew "antigen"
+# Zsh plugins
+brew "zsh-autosuggestions"
+brew "zsh-completions"
+brew "zsh-syntax-highlighting"
 brew "uv"
 # Double-entry accounting tool that works on plain text files
 brew "beancount"
@@ -65,6 +64,8 @@ brew "gcc"
 brew "gh"
 # Distributed revision control system
 brew "git"
+# Syntax-highlighting pager for Git
+brew "git-delta"
 # Git extension for versioning large files
 brew "git-lfs"
 # GNU Pretty Good Privacy (PGP) package
@@ -87,8 +88,6 @@ brew "luarocks"
 brew "marksman"
 # Polyglot runtime manager (asdf rust clone)
 brew "mise"
-# Node version management
-brew "n"
 # Netwide Assembler (NASM) is an 80x86 assembler
 brew "nasm"
 # Fast, highly customisable system info script
@@ -103,8 +102,6 @@ brew "nmap"
 brew "openjdk"
 # Highly capable, feature-rich programming language
 brew "perl"
-# Fast, disk space efficient package manager
-brew "pnpm"
 # PDF rendering library (based on the xpdf-3.0 code base)
 brew "poppler"
 # Cross-platform application and UI framework
@@ -115,8 +112,6 @@ brew "rcm"
 brew "redis"
 # Utility that provides fast incremental file transfer
 brew "rsync"
-# Powerful, clean, object-oriented scripting language
-brew "ruby"
 # Autoformat shell script source code
 brew "shfmt"
 # Ruby language server
@@ -157,6 +152,8 @@ brew "zoxide"
 brew "cirruslabs/cli/tart"
 # Password manager that keeps all passwords secure behind one password
 cask "1password"
+# Password manager and SSH agent
+cask "bitwarden"
 # GIT client
 cask "fork"
 # Terminal emulator that uses platform-native UI and GPU acceleration

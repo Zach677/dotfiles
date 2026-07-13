@@ -18,13 +18,13 @@
 	format = ssh
 [gpg "ssh"]
 	program = "/usr/bin/ssh-keygen"
-	allowedSignersFile = /Users/star/.ssh/allowedSigners
+	allowedSignersFile = ~/.ssh/allowedSigners
 [commit]
 	gpgsign = true
 [core]
     autocrlf = input
 	ignorecase = false
-	excludesfile = /Users/star/.gitignore
+	excludesfile = ~/.gitignore
 [mergetool]
 	keepBackup = false
 
@@ -32,15 +32,12 @@
 	default = simple
 	autoSetupRemote = true
 [pull]
-	default = current
 	rebase = true
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
 	required = true
-[pull]
-	ff = only
 [init]
 	defaultBranch = main
 [core]

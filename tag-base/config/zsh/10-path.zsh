@@ -8,6 +8,5 @@ path=(
     /opt/homebrew/opt/curl/bin
     /opt/homebrew/opt/llvm/bin
     /opt/homebrew/opt/qt@5/bin
-    /opt/homebrew/opt/mongodb-community/bin
     $path
 )

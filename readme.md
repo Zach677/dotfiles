@@ -1,47 +1,63 @@
 # Zach's Dotfiles
 
-### Usage
+Personal macOS configuration managed with [rcm](https://github.com/thoughtbot/rcm).
 
-Install rcm first. then run
+## Ownership
 
-```bash
-cd
-git clone https://github.com/Zach677/dotfiles --depth=1 ~/.dotfiles
-rcup -t base
-```
+- rcm links files from `tag-base/` into `$HOME`.
+- Homebrew manages applications and system tools from `tag-base/Brewfile`.
+- mise manages language runtimes from `tag-base/config/mise/config.toml`.
+- Machine-only shell configuration belongs in `~/.zshrc.local`.
 
-After, you will get normal config. (Eg. Tmux, zsh, git ...)
+## Bootstrap
 
-### Mise (tool versions)
-
-Global mise config is tracked at `config/mise/config.toml` and will be linked to `~/.config/mise/config.toml` by rcm.
-
-On a new machine:
+Install [Homebrew](https://brew.sh), then run:
 
 ```bash
-# 1) Install Homebrew (if not installed)
-# https://brew.sh
-
-# 2) Install dependencies (rcm + mise, etc.)
-brew bundle --file "$HOME/.dotfiles/Brewfile"
-
-# 3) Link dotfiles
-rcup -t base
-
-# 4) Ensure shell activation (zsh)
-# .zshrc already contains: eval "$(mise activate zsh)"
-
-# 5) Install tool versions from config
-mise install
+git clone https://github.com/Zach677/dotfiles.git "$HOME/.dotfiles"
+"$HOME/.dotfiles/macos-setup.sh"
 ```
 
-Notes:
-- Edit global versions in `config/mise/config.toml` and run `mise install` again.
-- For strict reproducibility, pin exact versions (e.g. `node = "22.17.0"`) instead of `latest`/`lts`.
-- You can also set versions via: `mise use -g node@lts python@3.12`.
+The setup script applies the tracked macOS preferences, installs the Brewfile,
+links the `base` tag, and installs the configured mise runtimes. It intentionally
+disables disk image verification and reveals Gatekeeper's `Anywhere` option;
+select `Anywhere` in System Settings > Privacy & Security after setup. SSH keys
+come from Bitwarden: sign in and enable its SSH Agent after installation. SSH
+host configuration remains outside this repository and must be restored
+separately.
 
-### Zsh
+Restore the default verification policy with:
 
-`.zshrc` is a small loader. Shared shell configuration lives in `config/zsh/*.zsh`
-and is loaded in filename order. Keep local machine-only settings in
-`~/.zshrc.local` instead of committing them here.
+```bash
+defaults delete com.apple.frameworks.diskimages skip-verify
+defaults delete com.apple.frameworks.diskimages skip-verify-locked
+defaults delete com.apple.frameworks.diskimages skip-verify-remote
+sudo spctl --global-enable
+```
+
+## Daily workflow
+
+Preview and apply dotfile changes:
+
+```bash
+lsrc -v
+rcup -v
+```
+
+Check package drift without installing or removing anything:
+
+```bash
+brew bundle check --verbose --file "$HOME/.Brewfile"
+mise outdated
+```
+
+Run the local checks after editing shell or bootstrap files:
+
+```bash
+shellcheck macos-setup.sh
+zsh -n tag-base/zshrc tag-base/config/zsh/*.zsh
+```
+
+RCM is intentionally retained for its small symlink-and-tag model. Revisit the
+choice when this repository needs templates, secret management, or real
+per-machine configuration instead of adding those features speculatively.
